@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_1_2</title>
+</head>
+
+<body>
+    <script>
+
+        MathFramework = {};
+        MathFramework.a = 0;
+        MathFramework.b = 0;
+        MathFramework.resylt = 0;
+        MathFramework.Work = function calculate(operator) {
+            a = MathFramework.a;
+            b = MathFramework.b;
+            if (typeof (a) == 'number' && typeof (b) == 'number') {
+
+                if (isNaN(a)) {
+                    alert("Перше значення не є числом");
+                } else if (isNaN(b)) {
+                    alert("Друге значення не є числом");
+                } else if (operator == "+" || operator == "-" || operator == "*" || operator == "/") {
+                    switch (operator) {
+                        case "+":
+                        MathFramework.resylt = a + b;
+                            break;
+
+                        case "-":
+                        MathFramework.resylt = a - b;
+                            break;
+
+                        case "*":
+                        MathFramework.resylt = a * b;
+                            break;
+
+                        case "/":
+                            if (b === 0) {
+                                MathFramework.resylt = "На '0' ділити не можно!"
+                            } else {
+                                MathFramework.resylt = a / b;
+                            }
+                            break;
+                    }
+                } else {
+                    alert("Введеного оператора не існує.");
+                }
+                return MathFramework.resylt;
+            } 
+            else if(MathFramework.a instanceof Array && MathFramework.b instanceof Array){
+                let arrResult = [];
+                let length = 0;
+
+                if(a.length >= b.length){
+                    length = a.length;
+                }else{
+                    length = b.length;
+                }
+
+                for(let i=0; i<length; i++){
+
+                    let operand1 = Number(a[i]);
+                    let operand2 = Number(b[i]);
+
+                    if(isNaN(operand1)){
+                        operand1 = 0;
+                    }
+                    if(isNaN(operand2)){
+                        operand2 = 0;
+                    }
+
+                    switch(operator){
+                        case "+":
+                            arrResult[i] = operand1 + operand2;
+                            break;
+                        case "-":
+                            arrResult[i] = operand1 - operand2;
+                            break;
+                        case "*":
+                            arrResult[i] = operand1 * operand2;
+                            break;
+                        case "/":
+                            if(operand2===0){
+                                MathFramework.resylt = ("На '0' ділити не можно!");
+                            }else{
+                                arrResult[i] = operand1 / operand2;
+                            }
+                            break;
+                        default:
+                            alert("Введеного оператора не існує.");
+                    }
+                }
+                MathFramework.resylt = arrResult;
+                return MathFramework.resylt;
+            }
+            else if (MathFramework.a instanceof Object && MathFramework.b instanceof Object) {
+                let tempResObject = {};
+                switch (operator) {
+                    case '+':
+                        tempResObject.a = a['a'] + b['a'];
+                        tempResObject.b = a['b'] + b['b'];
+                        break;
+                    case '-':
+                        tempResObject.a = a['a'] - b['a'];
+                        tempResObject.b = a['b'] - b['b'];
+                        break;
+                    case '*':
+                        tempResObject.a = a['a'] * b['a'];
+                        tempResObject.b = a['b'] * b['b'];
+                        break;
+                    case '/': if (b['a'] == 0 || b['b'] == 0) {
+                        return alert('Ділити на нуль не можна');
+                    } else {
+                        tempResObject.a = a['a'] / b['a'];
+                        tempResObject.b = a['b'] / b['b'];
+                    }; break;
+                    default: alert('Ви ввели неправильний арифметичний знак!'); 
+                        break;
+                }
+                MathFramework.resylt = tempResObject;
+                return MathFramework.resylt;
+            }
+        }
+
+        MathFramework.a = [1, 2, 3];
+        MathFramework.b = [4, 5, 6];
+        MathFramework.Work('+');
+        alert(MathFramework.resylt);
+    </script>
+</body>
+
+</html>
